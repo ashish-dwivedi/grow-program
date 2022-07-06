@@ -1,0 +1,10 @@
+<app-page-header pageTitle="Grow Day Requests" backRoute="''"></app-page-header>
+<app-grow-days-table
+  [growDays]="allGrowDays"
+  [displayedColumns]="displayedColumns"
+  (updateGrowDayStatusClicked)='onUpdateGrowDayStatusClick($event)'
+  *ngIf="allGrowDays?.length; else noGrowDayBlock"
+></app-grow-days-table>
+<ng-template #noGrowDayBlock>
+  Nothing pending for approval!
+</ng-template>

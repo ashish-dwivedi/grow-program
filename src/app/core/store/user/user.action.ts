@@ -1,6 +1,12 @@
-import { UserGrowDetails } from '../../shared/models';
+import { UserDetails } from '../../../shared/models';
 
-export class SetUserGrowDetails {
-  static readonly type = '[User] Set User Grow Details';
-  constructor(public payload: UserGrowDetails) {}
+export class SetUserDetails {
+  static readonly type = '[User] Set User Details';
+  constructor(public payload: UserDetails) {}
+}
+
+export class FetchUpdatedUserDetails {
+  static readonly type = '[User] Fetch Updated User Details';
+  constructor(public payload?: string) {
+  }
 }

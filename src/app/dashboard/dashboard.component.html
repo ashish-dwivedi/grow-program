@@ -1,0 +1,93 @@
+<app-page-header pageTitle="Home"></app-page-header>
+<div class="dashboard-wrapper">
+  <mat-card routerLink="new-request">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon>library_books</mat-icon>
+      </div>
+      <mat-card-title>Request New Resource</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Need a new book, course, journal or conference ticket? Submit a request with the resource
+        details here.
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card routerLink="requests">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon>work_history</mat-icon>
+      </div>
+      <mat-card-title>My Requests</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Follow the history of your previous requests, and track your progress.</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card routerLink="grow-day">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon>event</mat-icon>
+      </div>
+      <mat-card-title>Grow Days</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Book one Grow day a month and spend that time on your growth and development.
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card routerLink="user">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon>account_box</mat-icon>
+      </div>
+      <mat-card-title>My Overview</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>User details, along with budget overview</p>
+    </mat-card-content>
+  </mat-card>
+
+  <ng-container *resolvePermissions="['APPROVER', 'ADMIN']; partialMatchAllowed: true">
+    <hr>
+    <h2>
+      <mat-icon>admin_panel_settings</mat-icon>
+      Admin Panel
+    </h2>
+    <mat-card routerLink="request-approval">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>fact_check</mat-icon>
+        </div>
+        <mat-card-title>Review Pending Requests</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Review requests that are pending for your approval.</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card routerLink="day-approval">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>fact_check</mat-icon>
+        </div>
+        <mat-card-title>Review Pending Grow Days</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Review grow day requests pending for your approval.</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card [routerLink]="['user', 'budget']">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon>paid</mat-icon>
+        </div>
+        <mat-card-title>Users Overview</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>All registered users and their budget overview.</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>

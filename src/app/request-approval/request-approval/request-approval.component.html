@@ -1,0 +1,8 @@
+<app-page-header pageTitle="All Requests" backRoute="''">
+  <app-request-list-filters (filterChange)="onFilterChange($event)"></app-request-list-filters>
+</app-page-header>
+<app-request-table
+  [displayedColumns]="displayedColumns"
+  [dataSource]="allApprovalPendingRequests"
+  (rowClicked)="onRequestRowClicked($event)"
+></app-request-table>

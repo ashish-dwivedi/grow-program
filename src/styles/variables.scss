@@ -1,6 +1,13 @@
-// Breakpoints
-$breakpoint-sm: 768px;
-
-// Size Variables
-$page-wrapper-padding-sm: 0 5%;
-$page-wrapper-padding-lg: 0 10%;
+@mixin glow-animation($color) {
+  @keyframes glow {
+    0% {
+      box-shadow: 1px 1px 2px 2px $color;
+    }
+    50% {
+      box-shadow: unset;
+    }
+    100% {
+      box-shadow: 1px 1px 2px 2px $color;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import "src/styles/colors";
+
+.dashboard-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  align-items: center;
+
+  h2, hr {
+    flex-basis: 100%;
+  }
+
+  hr {
+    margin-top: 2rem;
+  }
+
+  mat-card {
+    flex-basis: 20%;
+    min-height: 100px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: $box-shadow;
+    }
+  }
+}

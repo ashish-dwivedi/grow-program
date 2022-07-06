@@ -1,0 +1,77 @@
+<div class="filter-section">
+  <form
+    [formGroup]="filterForm"
+    class="filters-container"
+    [ngClass]="{ expanded: areFiltersExpanded }"
+  >
+    <div class="d-flex">
+      <mat-form-field>
+        <mat-select formControlName="resourceType" placeholder="Resource Type">
+          <mat-option
+            *ngFor="let resourceType of resourceTypes"
+            [value]="resourceType"
+          >
+            {{ resourceType | transformToDisplayValue }}
+          </mat-option>
+        </mat-select>
+        <button
+          mat-icon-button
+          matSuffix
+          *ngIf="!!filterForm?.get('resourceType')?.value"
+          (click)="clearFilterField('resourceType')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select
+          formControlName="requestStatus"
+          placeholder="Request Status"
+        >
+          <mat-option
+            *ngFor="let requestStatus of requestStatuses"
+            [value]="requestStatus"
+          >
+            {{ requestStatus | transformToDisplayValue }}
+          </mat-option>
+        </mat-select>
+        <button
+          mat-icon-button
+          matSuffix
+          *ngIf="!!filterForm?.get('requestStatus')?.value"
+          (click)="clearFilterField('requestStatus')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <button mat-icon-button matPrefix>
+          <mat-icon matPrefix>search</mat-icon>
+        </button>
+        <input formControlName="title" matInput placeholder="Title" />
+        <button
+          mat-icon-button
+          matSuffix
+          *ngIf="!!filterForm?.get('title')?.value"
+          (click)="clearFilterField('title')"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="d-flex align-center">
+      <button mat-stroked-button type="reset" color="warn">
+        <mat-icon>clear_all</mat-icon>
+        Clear all
+      </button>
+    </div>
+  </form>
+  <button
+    mat-icon-button
+    matTooltip="Filter requests"
+    (click)="toggleFiltersVisibility()"
+    [matBadge]="getAppliedFilterCount() || ''"
+  >
+    <mat-icon>filter_list</mat-icon>
+  </button>
+</div>

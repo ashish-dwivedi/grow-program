@@ -1,8 +1,8 @@
-import { RequestUpdateType } from '../../enums';
+import { RequestStatus } from '../../enums';
 
-export interface ResourceRequestUpdatePayload {
+export interface RequestUpdatePayload {
   comment?: string;
   updatedOn?: string;
   resourceRequestId: string;
-  updateType: RequestUpdateType;
+  updateType: RequestStatus;
 }

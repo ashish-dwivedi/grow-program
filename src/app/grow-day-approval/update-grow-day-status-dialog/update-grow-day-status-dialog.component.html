@@ -1,0 +1,22 @@
+<div class="dialog-header">
+  <h2>Update Grow Day Status</h2>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="dialog-content">
+  <div class="label-value-container">
+    <label>Current status</label>
+    <div>{{ growDay?.status | transformToDisplayValue }}</div>
+  </div>
+  <div class="action-button-container">
+    <button mat-stroked-button color="warn" (click)="onUpdateBookingStatusClick(growDayStatus.Rejected)">
+      <mat-icon>close</mat-icon>
+      Reject
+    </button>
+    <button mat-flat-button color="primary" (click)="onUpdateBookingStatusClick(growDayStatus.Approved)">
+      <mat-icon>done_all</mat-icon>
+      Approve
+    </button>
+  </div>
+</div>

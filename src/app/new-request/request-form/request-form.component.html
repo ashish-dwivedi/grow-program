@@ -1,0 +1,98 @@
+<app-page-header pageTitle="Request Resource" backRoute="''"></app-page-header>
+<form
+  [formGroup]="requestForm"
+  (ngSubmit)="onFormSubmit()"
+  #formGroupDirective="ngForm"
+>
+  <mat-form-field>
+    <mat-select
+      formControlName="resourceType"
+      placeholder="Resource Type"
+      [compareWith]="compareFxn"
+    >
+      <mat-option
+        *ngFor="let resourceType of resourceTypes"
+        [value]="resourceType"
+        class="display-value"
+        >{{ resourceType | transformToDisplayValue: ["_"] }}</mat-option
+      >
+    </mat-select>
+    <mat-error *ngIf="requestForm?.get('resourceType')?.hasError('required')"
+      >Resource type is required</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="title" placeholder="Title" />
+    <mat-error *ngIf="requestForm?.get('title')?.hasError('required')"
+      >Title is required</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="resourceUrl" placeholder="Resource URL" />
+    <mat-error *ngIf="requestForm?.get('resourceUrl')?.hasError('required')"
+      >Url is required</mat-error
+    >
+    <mat-error *ngIf="requestForm?.get('resourceUrl')?.hasError('pattern')"
+      >Please provide a valid URL</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <textarea
+      matInput
+      formControlName="resourceDescription"
+      placeholder="Resource Description"
+    ></textarea>
+    <mat-error
+      *ngIf="requestForm?.get('resourceDescription')?.hasError('required')"
+      >Resource Description is required</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <textarea
+      matInput
+      formControlName="shippingAddress"
+      placeholder="Shipping Address"
+    ></textarea>
+    <mat-error *ngIf="requestForm?.get('shippingAddress')?.hasError('required')"
+      >Shipping address is required</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <textarea
+      matInput
+      formControlName="justification"
+      placeholder="Justification"
+    ></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      type="number"
+      min="1"
+      [max]="remainingBudget$ | async"
+      formControlName="estimatedCost"
+      placeholder="Estimated Cost"
+    />
+    <span matSuffix>/{{ remainingBudget$ | async }} €</span>
+    <mat-error *ngIf="requestForm?.get('estimatedCost')?.hasError('required')"
+      >Estimated cost is required</mat-error
+    >
+    <mat-error *ngIf="requestForm?.get('estimatedCost')?.hasError('max')"
+      >Estimated cost exceeds allocated budget!</mat-error
+    >
+    <mat-error *ngIf="requestForm?.get('estimatedCost')?.hasError('min')"
+      >Estimated cost should be greater than 0!</mat-error
+    >
+  </mat-form-field>
+  <div class="action-button-container">
+    <button mat-stroked-button color="warn" type="reset">Reset</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      type="submit"
+      [disabled]="requestForm?.invalid"
+    >
+      Submit Request
+    </button>
+  </div>
+</form>

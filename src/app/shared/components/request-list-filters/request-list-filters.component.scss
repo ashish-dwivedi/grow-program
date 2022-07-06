@@ -1,0 +1,36 @@
+@import "src/styles/colors";
+
+:host {
+  width: 100%;
+
+  .filter-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+
+    .filters-container {
+      display: flex;
+      flex-basis: 0;
+      overflow: hidden;
+      margin-left: 1rem;
+      padding-right: 1rem;
+      transition-duration: 0.4s;
+      justify-content: space-between;
+
+      &.expanded {
+        flex-basis: 90%;
+        background-color: $background-grey;
+        box-shadow: $box-shadow;
+      }
+
+      mat-form-field {
+        margin-left: 1rem;
+      }
+    }
+
+    button {
+      margin-left: 1rem;
+    }
+  }
+}

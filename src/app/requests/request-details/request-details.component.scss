@@ -1,0 +1,115 @@
+@import "src/styles/colors";
+
+.page-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+}
+
+.timeline-container {
+  display: flex;
+  padding-bottom: 100px;
+  flex-direction: column;
+
+  .node {
+    display: flex;
+    min-height: 320px;
+    margin-bottom: 50px;
+
+    &:last-child {
+      min-height: unset;
+      margin-bottom: unset;
+    }
+
+    &.APPROVED,
+    &.REJECTED {
+      .node-connector {
+        display: none;
+      }
+    }
+
+    .node-connector {
+      width: 0;
+      height: 320px;
+      margin-top: 52px;
+      margin-left: 25px;
+      position: absolute;
+      border: 1px solid $light-grey;
+    }
+
+    .node-icon {
+      z-index: 1;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      border: 2px solid $light-grey;
+
+      mat-icon {
+        color: $success-green;
+      }
+    }
+
+    .node-content {
+      width: calc(100% - 54px);
+      margin-left: 50px;
+
+      &.SUBMITTED {
+        .label-value-container {
+          width: 47%;
+        }
+      }
+
+      .label-value-container {
+        border-radius: 5px;
+        margin-bottom: 1rem;
+        width: calc(100% - 32px);
+      }
+
+      mat-card {
+        max-width: 100%;
+        border-radius: 15px;
+        box-shadow: $box-shadow;
+
+        mat-card-content {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+      }
+
+      mat-form-field {
+        width: 40%;
+      }
+    }
+  }
+}
+
+.footer {
+  left: 0;
+  width: 80%;
+  bottom: 10px;
+  height: 60px;
+  position: fixed;
+  margin-left: 10%;
+  background: white;
+  border: 1px solid $light-grey;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .action-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin: 0 1rem;
+    }
+  }
+}

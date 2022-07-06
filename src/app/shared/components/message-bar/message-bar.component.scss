@@ -1,0 +1,41 @@
+@import "src/styles/colors";
+@import "src/styles/variables";
+
+.message-bar {
+  display: flex;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  width: calc(100vw - 12rem);
+  animation: glow ease-in-out 3s;
+  animation-iteration-count: infinite;
+
+  &.warning {
+    color: $warning-orange;
+    border: 1px solid $warning-orange;
+    box-shadow: 0 0 5px 5px rgba(255, 124, 0, 0.4);
+  }
+
+  &.info {
+    color: $theme-blue;
+    border: 1px solid $theme-blue;
+    box-shadow: 0 0 5px 5px rgba(63, 99, 171, 0.4);
+  }
+
+  &.success {
+    color: $success-green;
+    border: 1px solid $success-green;
+    box-shadow: 0 0 5px 5px rgba(75, 181, 67, 0.4);
+  }
+
+  &.error {
+    color: $theme-red;
+    border: 1px solid $theme-red;
+    box-shadow: 0 0 5px 5px rgba(211, 44, 56, 0.4);
+  }
+
+  mat-icon {
+    margin-right: 1rem;
+  }
+}
+

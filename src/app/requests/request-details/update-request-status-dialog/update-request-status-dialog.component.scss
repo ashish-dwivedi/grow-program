@@ -1,0 +1,20 @@
+.dialog-content {
+  .label-value-container {
+    margin-bottom: 1rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    mat-form-field {
+      flex-basis: 100%;
+    }
+  }
+}
+
+.action-button-container {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: flex-end;
+}

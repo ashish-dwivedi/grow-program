@@ -1,0 +1,57 @@
+@import "src/styles/colors";
+
+.top-bar-container {
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  position: fixed;
+  padding: 0 5rem;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: $box-shadow;
+  justify-content: space-between;
+  background: $background-gradient;
+
+  .logo-name-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    h1 {
+      font-size: 30px;
+
+      sup {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .action-buttons-container {
+    display: flex;
+    align-items: center;
+
+    mat-chip {
+      color: white;
+      border-radius: 0;
+
+      &.green {
+        background-color: $success-green;
+      }
+
+      &.blue {
+        background-color: $windows-blue;
+      }
+
+      &.orange {
+        background-color: $warning-orange;
+      }
+
+      mat-icon {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

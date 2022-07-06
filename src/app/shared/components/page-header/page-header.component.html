@@ -1,0 +1,11 @@
+<div class="header-container">
+  <div class="d-flex">
+    <button *ngIf="!!backRoute" mat-icon-button (click)="onBackClick()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{ pageTitle }}</h1>
+  </div>
+  <div class="page-header-content">
+    <ng-content></ng-content>
+  </div>
+</div>

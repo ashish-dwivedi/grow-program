@@ -1,1 +1,142 @@
-/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "styles/colors";
+@import "styles/reusable";
+@import "styles/variables";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  color: black;
+  font-size: 16px;
+  background: $background-gradient;
+
+  * {
+    :not(mat-icon) {
+      font-family: "FuturaMedium", Roboto, "Helvetica Neue", sans-serif !important;
+    }
+
+    h1, h2 {
+      font-family: "FuturaBold", Roboto, "Helvetica Neue", sans-serif !important;
+    }
+  }
+}
+
+table {
+  &.mat-table {
+    background-color: $background-grey;
+
+    thead {
+      tr {
+        &:hover {
+          background-color: $background-grey !important;
+        }
+      }
+    }
+  }
+}
+
+.mat-icon-button {
+  border-width: 1px
+}
+
+mat-card {
+  background-color: $background-grey !important;
+  border: 1px solid $light-grey;
+
+  mat-card-header {
+    mat-card-title,
+    mat-icon {
+      color: $accent-color;
+    }
+  }
+}
+
+.display-value {
+  text-transform: capitalize;
+}
+
+.label-value-container {
+  padding: 10px;
+  border: 1px solid $dark-grey;
+  box-shadow: 4px 4px 2px 0 $light-grey;
+
+  label {
+    font-size: 14px;
+    color: $dark-grey;
+    margin-bottom: 0.5rem;
+  }
+
+  div {
+    font-size: 16px;
+  }
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+mat-chip {
+  &.request-status-chip {
+    border-color: $theme-blue;
+    background-color: rgba(63, 99, 171, 0.4);
+
+    &.submitted {
+      color: $theme-blue;
+      border-color: $theme-blue;
+      background-color: rgba(63, 99, 171, 0.4);
+    }
+
+    &.approved {
+      color: $success-green;
+      border-color: $success-green;
+      background-color: rgba(75, 181, 67, 0.4);
+    }
+
+    &.rejected {
+      color: $theme-red;
+      border-color: $theme-red;
+      background-color: rgba(211, 44, 56, 0.4);
+    }
+
+    &.waiting_for_input {
+      color: $warning-orange;
+      border-color: $warning-orange;
+      background-color: rgba(255, 124, 0, 0.4);
+    }
+  }
+}
+
+.resource-type-display-value {
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+
+  mat-icon {
+    margin-right: 1rem;
+  }
+}
+
+@font-face {
+  font-family: "FuturaLight";
+  src: url("./assets/fonts/FuturaLightFont.ttf");
+}
+
+@font-face {
+  font-family: "FuturaMedium";
+  src: url("./assets/fonts/FuturaMediumBt.ttf");
+}
+
+@font-face {
+  font-family: "FuturaBold";
+  src: url("./assets/fonts/FuturaBoldFont.ttf");
+}

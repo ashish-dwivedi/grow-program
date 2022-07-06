@@ -1,0 +1,20 @@
+<div class="dialog-header">
+  <h2>{{ confirmationPromptData?.heading || "Confirm Action" }}</h2>
+  <button mat-icon-button matDialogClose>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="dialog-content" [innerHTML]="confirmationPromptData?.message"></div>
+<div class="action-button-container">
+  <button mat-stroked-button matDialogClose>
+    {{ confirmationPromptData?.dismissButtonText || "Dismiss" }}
+  </button>
+  <button
+    mat-flat-button
+    *ngIf="!!confirmationPromptData?.confirmButtonText"
+    [color]="confirmationPromptData?.confirmButtonColor || 'primary'"
+    (click)="onConfirmClick()"
+  >
+    {{ confirmationPromptData?.confirmButtonText || "Confirm" }}
+  </button>
+</div>

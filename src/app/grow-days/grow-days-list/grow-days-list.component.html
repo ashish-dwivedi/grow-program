@@ -1,0 +1,28 @@
+<app-page-header pageTitle="Grow Days" backRoute="''">
+  <div class="d-flex justify-end">
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="(userState$ | async)?.growDays === 0"
+      (click)="onApplyGrowDayClick()"
+    >
+      <!--      [disabled]="isCurrentMonthBooked() && !isBookingWindowForNextMonthOpen()"-->
+      <mat-icon>add</mat-icon>
+      Apply Grow Day
+    </button>
+  </div>
+</app-page-header>
+<app-message-bar *ngIf="isCurrentMonthBooked()" type="info"
+  >Current month's quota is already booked! Bookings can only be made for next months!</app-message-bar
+>
+<app-grow-days-table
+  *ngIf="allUserGrowDays?.length; else noGrowDaysBlock"
+  [growDays]="allUserGrowDays"
+  [displayedColumns]="displayedColumns"
+  (deleteItemClicked)="onDeleteGrowDayClick($event)"
+></app-grow-days-table>
+<ng-template #noGrowDaysBlock>
+  <div class="no-grow-days-block">
+    <h2>No grow days booked yet!</h2>
+  </div>
+</ng-template>

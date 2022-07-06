@@ -1,0 +1,20 @@
+<app-page-header pageTitle="My Requests" backRoute="''">
+  <app-request-list-filters
+    (filterChange)="onFilterChange($event)"
+  ></app-request-list-filters>
+</app-page-header>
+<app-request-table
+  *ngIf="dataSource?.length; else noRequestBlock"
+  [displayedColumns]="displayedColumns"
+  [dataSource]="dataSource"
+  (rowClicked)="onResourceRequestClick($event)"
+  (deleteResourceRequestClicked)="onDeleteResourceRequestClick($event)"
+></app-request-table>
+<ng-template #noRequestBlock>
+  <div class="no-request-block">
+    <h2>No request found!</h2>
+    <button mat-flat-button [routerLink]="['/new-request']" color="primary">
+      Create Request
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,39 @@
+<div class="dialog-header">
+  <h2>Update Request Status</h2>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="dialog-content">
+  <div class="label-value-container">
+    <label>Current status</label>
+    <div>{{ requestDetails?.requestStatus | transformToDisplayValue }}</div>
+  </div>
+  <form [formGroup]="requestStatusUpdateForm">
+    <mat-form-field>
+      <mat-select formControlName="newStatus" placeholder="New status">
+        <mat-option *ngFor="let status of allowedStatuses" [value]="status">{{
+          status | transformToDisplayValue
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="comment" placeholder="Comment" />
+      <mat-error
+        *ngIf="requestStatusUpdateForm.get('comment')?.hasError('required')"
+        >Comments are required to move the status!</mat-error
+      >
+    </mat-form-field>
+  </form>
+  <div class="action-button-container">
+    <button
+      mat-flat-button
+      [color]="updateButtonColor"
+      [disabled]="requestStatusUpdateForm?.invalid"
+      (click)="onUpdateRequestClick()"
+    >
+      <mat-icon>save</mat-icon>
+      Update
+    </button>
+  </div>
+</div>

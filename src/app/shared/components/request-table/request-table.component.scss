@@ -1,0 +1,17 @@
+@import "src/styles/colors";
+
+table {
+  width: 100%;
+
+  tr {
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(230, 230, 230);
+    }
+  }
+
+  .display-value {
+    text-transform: capitalize;
+  }
+}

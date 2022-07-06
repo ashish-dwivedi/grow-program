@@ -1,10 +1,39 @@
-<mat-toolbar>
-  <h1>XPNS Add-Ons</h1>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
+<mat-toolbar class="top-bar-container">
+  <div class="logo-name-container" routerLink="">
+    <img src="assets/img/SO1-logo-mini.png" alt="so1-logo" class="mr-1" />
+    <h1>
+      SMP
+      <sup>[GROW]</sup>
+    </h1>
+  </div>
+  <div class="action-buttons-container">
+    <mat-chip-list *ngIf="!!(userState$ | async)">
+      <mat-chip class="blue" matTooltip="Frozen Growth Budget">
+        <mat-icon>lock_clock</mat-icon>
+        {{ (userState$ | async)?.frozenBudget }} €</mat-chip
+      >
+      <mat-chip class="green" matTooltip="Remaining Growth Budget">
+        <mat-icon>payments</mat-icon>
+        {{ (userState$ | async)?.remainingBudget }} €
+      </mat-chip>
+      <mat-chip class="orange" matTooltip="Remaining Grow Days">
+        <mat-icon>event</mat-icon>
+        {{ (userState$ | async)?.growDays | transformSpanToDays }}
+      </mat-chip>
+    </mat-chip-list>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['user']">
+        <mat-icon>face</mat-icon>
+        <span>User profile</span>
+      </button>
+      <button mat-menu-item (click)="logout()" >
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
 </mat-toolbar>

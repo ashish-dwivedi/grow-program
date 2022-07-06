@@ -1,7 +1,7 @@
-@import './colors';
+@import 'src/styles/colors';
 
 .subtext {
-  color: $dark-gray;
+  color: $light-grey;
 }
 
 .bold {
@@ -66,4 +66,8 @@
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }

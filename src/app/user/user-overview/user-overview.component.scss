@@ -1,0 +1,54 @@
+@import "src/styles/colors";
+
+.user-info-container {
+  display: flex;
+  flex-direction: column;
+
+  .budget-container {
+    display: flex;
+
+    .info-card {
+      color: white;
+      padding: 1rem;
+      flex-basis: 15%;
+      margin: 0 1rem 1rem 0;
+      border: 1px solid $light-grey;
+
+      h3 {
+        margin-top: 0;
+      }
+
+      &.green {
+        background-color: $success-green;
+      }
+
+      &.blue {
+        background-color: $windows-blue;
+      }
+
+      &.orange {
+        background-color: $warning-orange;
+      }
+    }
+  }
+
+  .info-container {
+    display: flex;
+    flex-direction: column;
+
+    .info {
+      display: flex;
+      margin-bottom: 2rem;
+      flex-direction: column;
+
+      label {
+        font-weight: bold;
+      }
+
+      img {
+        width: 100px;
+        border-radius: 50%;
+      }
+    }
+  }
+}

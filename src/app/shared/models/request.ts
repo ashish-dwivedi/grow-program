@@ -1,6 +1,6 @@
 import { RequestStatus, ResourceType } from '../enums';
 
-export interface ResourceRequest {
+export interface Request {
   _id: string;
   title: string;
   resourceType: ResourceType;

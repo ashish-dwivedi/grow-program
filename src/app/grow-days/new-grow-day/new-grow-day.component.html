@@ -1,0 +1,56 @@
+<div class="dialog-header">
+  <h1>Apply Grow Day</h1>
+  <button mat-icon-button matDialogClose>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="dialog-content">
+  <form [formGroup]="growDayForm">
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="date"
+        [min]="minDate"
+        placeholder="Date"
+        [matDatepickerFilter]="dateFilter"
+        [matDatepicker]="picker"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="growDayForm?.get('date')?.hasError('required')">Date is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select
+        formControlName="span"
+        placeholder="Grow day span"
+      >
+        <mat-option *ngFor="let growDaySpan of allowedSpansForSelectedMonth" [value]="growDaySpan">{{
+          growDaySpan | transformToDisplayValue
+        }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="growDayForm?.get('span')?.hasError('required')">Span is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Goal" formControlName="goal"></textarea>
+      <mat-error *ngIf="growDayForm?.get('goal')?.hasError('required')">Goal is required</mat-error>
+    </mat-form-field>
+
+    <div class="d-flex align-center">
+      <mat-checkbox formControlName="teamApprovalConfirmed">Team Approved?</mat-checkbox>
+    </div>
+  </form>
+</div>
+<div class="action-button-container">
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="growDayForm?.invalid"
+    (click)="onSubmitClick()"
+  >
+    <mat-icon>save</mat-icon>
+    Submit
+  </button>
+</div>

@@ -1,0 +1,67 @@
+<table mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+  </ng-container>
+  <ng-container matColumnDef="resourceType">
+    <th mat-header-cell *matHeaderCellDef>Resource Type</th>
+    <td mat-cell *matCellDef="let element">
+      <div class="resource-type-display-value">
+        <mat-icon>{{ getIconForRequestType(element.resourceType) }}</mat-icon>
+        {{ element.resourceType | transformToDisplayValue }}
+      </div>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="estimatedCost">
+    <th mat-header-cell *matHeaderCellDef>Estimated Cost</th>
+    <td mat-cell *matCellDef="let element" class="display-value">{{ element.estimatedCost }} €</td>
+  </ng-container>
+  <ng-container matColumnDef="creationDate">
+    <th mat-header-cell *matHeaderCellDef>Creation Date</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.creationDate | date: "dd-MM-yyyy" }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="createdBy">
+    <th mat-header-cell *matHeaderCellDef>Created By</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.createdByName || element.createdById }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="lastModifiedOn">
+    <th mat-header-cell *matHeaderCellDef>Last Modified On</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.lastModifiedOn | date: "dd-MM-yyyy hh:mm a" }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-chip-list>
+        <mat-chip class="request-status-chip" [class]="element?.requestStatus | lowercase">{{
+          element?.requestStatus | transformToDisplayValue
+        }}</mat-chip>
+      </mat-chip-list>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        mat-icon-button
+        matTooltip="Delete request"
+        [disabled]="isRequestCompleted(element?.requestStatus)"
+        (click)="onDeleteResourceRequestClick(element, $event)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    (click)="onResourceRequestRowClick(row)"
+  ></tr>
+</table>

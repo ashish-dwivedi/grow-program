@@ -1,0 +1,137 @@
+<div class="page-header">
+  <app-page-header [pageTitle]="requestDetails?.title" backRoute="''"></app-page-header>
+  <mat-chip-list>
+    <mat-chip class="request-status-chip" [class]="requestDetails?.requestStatus | lowercase">{{
+      requestDetails?.requestStatus | transformToDisplayValue
+    }}</mat-chip>
+  </mat-chip-list>
+</div>
+<app-message-bar
+  *ngIf="
+    requestDetails?.requestStatus === requestStatuses.WaitingForInput &&
+    requestDetails?.createdById === (userId$ | async)
+  "
+  type='warning'
+>
+  This request requires your attention. Please check comments for details.
+</app-message-bar>
+<div class="timeline-container">
+  <div class="node">
+    <div class="node-icon">
+      <mat-icon>library_add_check</mat-icon>
+    </div>
+    <div class="node-connector"></div>
+    <div class="node-content SUBMITTED">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Created</mat-card-title>
+          <mat-card-subtitle
+            >by {{ requestDetails?.createdByName }} |
+            {{ requestDetails?.creationDate | date: "dd.MM.yyyy hh:mm a" }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <div class="label-value-container">
+            <label>Description</label>
+            <div>
+              {{ requestDetails?.resourceDescription }}
+            </div>
+          </div>
+          <div class="label-value-container">
+            <label>Resource Type</label>
+            <div class="resource-type-display-value">
+              <mat-icon>{{ getIconForRequestType(requestDetails?.resourceType) }}</mat-icon>
+              {{ requestDetails?.resourceType | transformToDisplayValue }}
+            </div>
+          </div>
+          <div class="label-value-container">
+            <label>Estimated Cost</label>
+            <div>{{ requestDetails?.estimatedCost }} €</div>
+          </div>
+          <div class="label-value-container">
+            <label>Resource Url</label>
+            <div>
+              <a target="_blank" [href]="requestDetails?.resourceUrl">
+                {{ requestDetails?.resourceUrl }}
+              </a>
+            </div>
+          </div>
+          <div class="label-value-container" *ngIf="requestDetails?.justification">
+            <label>Justification</label>
+            <div>
+              {{ requestDetails?.justification }}
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div
+    class="node"
+    [ngClass]="resourceRequestUpdate?.updateType || ''"
+    *ngFor="let resourceRequestUpdate of resourceRequestUpdates"
+  >
+    <div class="node-icon">
+      <mat-icon>{{ getNodeIconFromUpdateType(resourceRequestUpdate.updateType) }}</mat-icon>
+    </div>
+    <div class="node-connector"></div>
+    <div class="node-content">
+      <mat-card *ngIf="resourceRequestUpdate?.comment; else noCommentBlock">
+        <mat-card-header>
+          <mat-card-title>@{{ resourceRequestUpdate?.updatedByName }}</mat-card-title>
+          <mat-card-subtitle>{{
+            resourceRequestUpdate?.updatedOn | date: "dd.MM.yyyy hh:mm a"
+          }}</mat-card-subtitle>
+        </mat-card-header>
+        <div class="label-value-container">
+          <label>Commented</label>
+          <div>{{ resourceRequestUpdate?.comment }}</div>
+        </div>
+      </mat-card>
+      <ng-template #noCommentBlock>
+        <h2>{{ requestDetails?.requestStatus }}</h2>
+      </ng-template>
+    </div>
+  </div>
+
+  <div
+    class="node"
+    *ngIf="
+      requestDetails?.requestStatus !== requestStatuses.Approved &&
+      requestDetails?.requestStatus !== requestStatuses.Rejected
+    "
+  >
+    <div class="node-icon">
+      <mat-icon>edit</mat-icon>
+    </div>
+    <div class="node-content">
+      <mat-form-field class="mr-1">
+        <textarea [formControl]="comment" matInput placeholder="Comment"></textarea>
+      </mat-form-field>
+      <button mat-flat-button [disabled]="!comment?.value" (click)="onSaveCommentClick()">
+        <mat-icon>save</mat-icon>
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-container *resolvePermissions="['APPROVER', 'ADMIN']; partialMatchAllowed: true">
+  <!--  Do not display the update status button/footer if the request is closed or is created by the logged in user -->
+  <div
+    class="footer"
+    *ngIf="
+      requestDetails?.createdById !== (userId$ | async) &&
+      requestDetails?.requestStatus !== requestStatuses.Approved &&
+      requestDetails?.requestStatus !== requestStatuses.Rejected
+    "
+  >
+    <div class="action-button-container">
+      <button mat-flat-button color="primary" (click)="onUpdateStatusClick()">
+        <mat-icon>credit_score</mat-icon>
+        Update Status
+      </button>
+    </div>
+  </div>
+</ng-container>

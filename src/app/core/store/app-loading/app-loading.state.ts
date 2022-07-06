@@ -2,64 +2,29 @@ import { Injectable } from '@angular/core';
 
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { FetchUpdatedUserDetails, SetUserDetails } from './user.action';
-import { UserDetails, UserStateModel } from '../../../shared/models';
-import { UserService } from '../../services/user/user.service';
+import { AppLoadingStateModel } from '../../../shared/models';
+import { StartAppLoading, StopAppLoading } from './app-loading.action';
 
-@State<UserStateModel>({
-  name: 'user',
+@State<AppLoadingStateModel>({
+  name: 'loading',
   defaults: {
-    _id: '',
-    remainingBudget: 0,
-    frozenBudget: 0,
-    email: '',
-    email_verified: false,
-    family_name: '',
-    given_name: '',
-    locale: '',
-    name: '',
-    nickname: '',
-    picture: '',
-    sub: '',
-    updated_at: '',
+    isAppLoading: false,
   },
 })
 @Injectable()
-export class UserState {
-  constructor(private readonly userService: UserService) {}
-
+export class AppLoadingState {
   @Selector()
-  static userState(state: UserStateModel) {
-    return state;
+  static isAppLoading(state: AppLoadingStateModel) {
+    return state.isAppLoading;
   }
 
-  @Selector()
-  static userId(state: UserStateModel) {
-    return state?._id;
+  @Action(StartAppLoading)
+  startAppLoading({ setState }: StateContext<AppLoadingStateModel>): void {
+    setState({ isAppLoading: true });
   }
 
-  @Selector()
-  static remainingBudget(state: UserStateModel) {
-    return state.remainingBudget;
-  }
-
-  @Action(SetUserDetails)
-  setUserGrowDetails(
-    { getState, setState }: StateContext<UserStateModel>,
-    { payload }: SetUserDetails
-  ): void {
-    setState({ ...getState(), ...payload });
-  }
-
-  @Action(FetchUpdatedUserDetails)
-  fetchUpdatedUserDetails({
-    getState,
-    setState,
-  }: StateContext<UserStateModel>, { payload }: FetchUpdatedUserDetails): void {
-    this.userService
-      .getUserDetailsBySubjectId(payload || getState()?.sub)
-      .subscribe((userDetails: UserDetails) => {
-        setState({ ...getState(), ...userDetails });
-      });
+  @Action(StopAppLoading)
+  stopAppLoading({ setState }: StateContext<AppLoadingStateModel>): void {
+    setState({ isAppLoading: false });
   }
 }

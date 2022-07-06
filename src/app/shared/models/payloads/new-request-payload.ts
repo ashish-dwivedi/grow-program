@@ -1,6 +1,6 @@
 import { ResourceType } from '../../enums';
 
-export interface ResourceRequestPayload {
+export interface NewRequestPayload {
   resourceType: ResourceType;
   title: string;
   resourceDescription: string;

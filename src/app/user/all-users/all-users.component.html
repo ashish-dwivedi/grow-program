@@ -1,0 +1,55 @@
+<app-page-header pageTitle="Users" backRoute="''"></app-page-header>
+<table mat-table [dataSource]="allUsers">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element?.name }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef>Role</th>
+    <td mat-cell *matCellDef="let element">
+      <span *ngFor="let role of element?.roles; let last = last"
+        >{{ role | transformToDisplayValue }}<span *ngIf="!last">, </span></span
+      >
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="growDays">
+    <th mat-header-cell *matHeaderCellDef>Grow Days Balance</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element?.growDays | transformSpanToDays }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="frozenBudget">
+    <th mat-header-cell *matHeaderCellDef>Frozen Budget</th>
+    <td mat-cell *matCellDef="let element">{{ element?.frozenBudget }} €</td>
+  </ng-container>
+  <ng-container matColumnDef="remainingBudget">
+    <th mat-header-cell *matHeaderCellDef>Remaining Budget</th>
+    <td mat-cell *matCellDef="let element">{{ element?.remainingBudget }} €</td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        mat-icon-button
+        matTooltip="Refill budget"
+        [disabled]="element?.remainingBudget === initialUserBudget"
+        (click)="onResetBudgetClick(element)"
+      >
+        <mat-icon>currency_exchange</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matTooltip="Delete user"
+        [disabled]="(userId$ | async) === element?._id"
+        (click)="onDeleteUserClick(element)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
